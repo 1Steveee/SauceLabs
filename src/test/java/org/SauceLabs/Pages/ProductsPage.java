@@ -3,6 +3,9 @@ package org.SauceLabs.Pages;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
 
 public class ProductsPage {
 
@@ -21,8 +24,42 @@ public class ProductsPage {
     }
 
 
+    private WebElement backPack() {
+        return driver.findElements
+                (AppiumBy.androidUIAutomator("new UiSelector().text(\"ADD TO CART\")")).get(0);
+    }
+
+    private WebElement cart() {
+        return driver.findElement(AppiumBy.accessibilityId("test-Cart"));
+    }
+
+    public CartPage addBackpackToCart() {
+        backPack().click();
+        cart().click();
+        Actions actions = new Actions(driver);
+        actions.pause(Duration.ofSeconds(2)).perform();
+        return new CartPage(driver);
+    }
+
+    public String getBackpackPrice() {
+        return driver.findElements(AppiumBy.className("android.widget.TextView")).get(4).getText();
+    }
+
+
     public void logout() {
         menu().click();
         logoutButton().click();
     }
+
+    public boolean verifyLogOutButton() {
+        menu().click();
+        return logoutButton().isDisplayed();
+    }
+
+    public void closeMenu() {
+        menu().click();
+        Actions actions = new Actions(driver);
+        actions.pause(Duration.ofSeconds(2)).perform();
+    }
+
 }

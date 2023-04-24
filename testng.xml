@@ -5,7 +5,9 @@
         <classes>
             <class name="org.SauceLabs.SauceLabsTest">
                 <methods>
-                    <include name="testMultipleLogins"/>
+<!--                    <include name="testMultipleLogins"/>-->
+                    <include name="testSingleLogin"/>
+                    <include name="testAddProductToCart"/>
                 </methods>
             </class>
         </classes>

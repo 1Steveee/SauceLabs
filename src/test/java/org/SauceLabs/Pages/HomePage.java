@@ -67,4 +67,10 @@ public class HomePage {
         return driver.findElements(AppiumBy.className("android.widget.TextView")).get(2).getText();
     }
 
+    public ProductsPage loginToApp(String username, String password) {
+        fillLoginFields(username,password);
+        loginButton().click();
+        return new ProductsPage(driver);
+    }
+
 }
