@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
+import static org.SauceLabs.Utillities.Helper.pauseExecution;
+
 public class ProductsPage {
 
     private AndroidDriver driver;
@@ -36,8 +38,7 @@ public class ProductsPage {
     public CartPage addBackpackToCart() {
         backPack().click();
         cart().click();
-        Actions actions = new Actions(driver);
-        actions.pause(Duration.ofSeconds(2)).perform();
+        pauseExecution(2, driver);
         return new CartPage(driver);
     }
 
@@ -58,8 +59,7 @@ public class ProductsPage {
 
     public void closeMenu() {
         menu().click();
-        Actions actions = new Actions(driver);
-        actions.pause(Duration.ofSeconds(2)).perform();
+        pauseExecution(2,driver);
     }
 
 }

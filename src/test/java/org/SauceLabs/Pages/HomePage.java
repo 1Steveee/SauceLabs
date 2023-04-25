@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.SauceLabs.Utillities.Helper.pauseExecution;
+
 public class HomePage {
 
     private AndroidDriver driver;
@@ -52,18 +54,13 @@ public class HomePage {
         }
     }
 
-    private void pauseForErrorMessage() {
-        Actions actions = new Actions(driver);
-        actions.pause(Duration.ofSeconds(5)).perform();
-    }
-
     public String getLockedOutUserErrorMessage() {
-        pauseForErrorMessage();
+        pauseExecution(5, driver);
         return driver.findElements(AppiumBy.className("android.widget.TextView")).get(0).getText();
     }
 
     public String getLoginErrorMessage() {
-        pauseForErrorMessage();
+        pauseExecution(5, driver);
         return driver.findElements(AppiumBy.className("android.widget.TextView")).get(2).getText();
     }
 
