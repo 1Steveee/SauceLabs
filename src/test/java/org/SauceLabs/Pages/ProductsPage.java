@@ -3,9 +3,6 @@ package org.SauceLabs.Pages;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import java.time.Duration;
 
 import static org.SauceLabs.Utillities.Helper.pauseExecution;
 
