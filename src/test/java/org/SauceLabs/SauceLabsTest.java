@@ -2,11 +2,10 @@ package org.SauceLabs;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.SauceLabs.Pages.CartPage;
+import org.SauceLabs.Pages.CheckOutPage;
 import org.SauceLabs.Pages.HomePage;
 import org.SauceLabs.Pages.ProductsPage;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +23,6 @@ public class SauceLabsTest extends BaseTest {
     private final String PASSWORD = "secret_sauce";
     private HomePage homePage;
     private ProductsPage productsPage;
-    private CartPage cartPage;
 
     @BeforeClass
     public void setUpTest() {
@@ -60,18 +58,80 @@ public class SauceLabsTest extends BaseTest {
         }
     }
 
-    @Test
-    public void testSingleLogin() {
+    @BeforeMethod
+    public void login() {
         this.productsPage = this.homePage.loginToApp(STANDARD_USER, PASSWORD);
-        assertTrue(this.productsPage.verifyLogOutButton());
-        this.productsPage.closeMenu();
     }
 
     @Test
-    public void testAddProductToCart() {
-        this.cartPage = this.productsPage.addBackpackToCart();
-        assertEquals("Sauce Labs Backpack", cartPage.getProductName());
-        assertEquals("$29.99", cartPage.getProductPrice());
+    public void testAddToCartButton() {
+        this.productsPage.addSauceLabProduct(1);
+        assertEquals("REMOVE", this.productsPage.getRemoveButtonText());
 
+    }
+
+    @Test
+    public void testVerifyQuantityAdded() {
+        this.productsPage.addSauceLabProduct(1);
+        assertEquals("1", this.productsPage.getCartTotalQuantity());
+
+    }
+
+    @Test
+    public void testVerifyQuantityTwoAdded() {
+        this.productsPage.addSauceLabProduct(2);
+        assertEquals("2", this.productsPage.getCartTotalQuantity());
+    }
+
+    @Test
+    public void testRemoveProduct() {
+        this.productsPage.addSauceLabProduct(2);
+        assertEquals("2", this.productsPage.getCartTotalQuantity());
+        this.productsPage.removeSauceLabProduct(1);
+        assertEquals("1", this.productsPage.getCartTotalQuantity());
+    }
+
+    @Test
+    public void testVerifyCartDetails() {
+        CartPage cartPage = this.productsPage.addProductAndMoveToCart(2);
+        assertEquals("Sauce Labs Backpack", cartPage.getFirstProductName());
+        assertEquals("$29.99", cartPage.getFirstProductPrice());
+        assertEquals("Sauce Labs Bike Light", cartPage.getSecondProductName());
+        assertEquals("$9.99", cartPage.getSecondProductPrice());
+    }
+
+    @Test
+    public void testVerifyCartDetailsSingleItem() {
+        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        assertEquals("Sauce Labs Backpack", cartPage.getFirstProductName());
+        assertEquals("$29.99", cartPage.getFirstProductPrice());
+
+        cartPage.addAdditionalProduct();
+        assertEquals("Sauce Labs Bike Light", cartPage.getSecondProductName());
+        assertEquals("$9.99", cartPage.getSecondProductPrice());
+    }
+
+    @Test
+    public void testEndToEndTransaction() {
+        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        assertEquals("Sauce Labs Backpack", cartPage.getFirstProductName());
+        assertEquals("$29.99", cartPage.getFirstProductPrice());
+
+        CheckOutPage checkOutPage = cartPage.proceedToCheckOutPage();
+        checkOutPage.checkOut("Steven", "Test", "33803");
+        assertEquals("Sauce Labs Backpack", checkOutPage.getProductName());
+        assertEquals("$29.99", checkOutPage.getProductPrice());
+        assertEquals("SauceCard #31337", checkOutPage.getPaymentDetails());
+        assertEquals("FREE PONY EXPRESS DELIVERY!", checkOutPage.getShippingDetails());
+        assertEquals("$32.39", checkOutPage.getTotalPrice());
+
+
+    }
+
+
+
+    @AfterMethod
+    public void logout() {
+        this.homePage.logout();
     }
 }

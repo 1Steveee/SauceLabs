@@ -3,7 +3,11 @@ package org.SauceLabs.Pages;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+import java.time.Duration;
 
 import static org.SauceLabs.Utillities.Helper.pauseExecution;
 
@@ -19,11 +23,19 @@ public class HomePage {
         return driver.findElement(AppiumBy.accessibilityId("test-Username"));
    }
 
+    private WebElement menu() {
+        return driver.findElement(AppiumBy.accessibilityId("test-Menu"));
+    }
+
+    private WebElement logoutButton() {
+        return driver.findElement(AppiumBy.accessibilityId("test-LOGOUT"));
+    }
+
     private WebElement passwordField() {
         return driver.findElement(AppiumBy.accessibilityId("test-Password"));
     }
 
-    private WebElement loginButton() {
+    public WebElement loginButton() {
         return driver.findElement(AppiumBy.accessibilityId("test-LOGIN"));
     }
 
@@ -38,14 +50,30 @@ public class HomePage {
         return driver.findElements(AppiumBy.className("android.widget.TextView")).get(2);
     }
 
+    public void logout() {
+        menu().click();
+        logoutButton().click();
+
+    }
+
+    public boolean verifyLogOutButton() {
+        menu().click();
+        return logoutButton().isDisplayed();
+    }
+
+    public void closeMenu() {
+        menu().click();
+        pauseExecution(2,driver);
+    }
+
 
     public void loginToApp(String username, String password, Boolean isValidLogin) {
         fillLoginFields(username,password);
         loginButton().click();
 
         if (isValidLogin) {
-            ProductsPage productsPage = new ProductsPage(driver);
-            productsPage.logout();
+
+            logout();
         }
     }
 
