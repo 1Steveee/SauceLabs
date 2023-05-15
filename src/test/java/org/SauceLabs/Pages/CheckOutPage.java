@@ -24,6 +24,10 @@ public class CheckOutPage {
         return driver.findElement(AppiumBy.accessibilityId("test-CONTINUE"));
     }
 
+    private WebElement finishButton() {
+        return driver.findElement(AppiumBy.accessibilityId("test-FINISH"));
+    }
+
     private WebElement zipCodeField() {
         return driver.findElement(AppiumBy.accessibilityId("test-Zip/Postal Code"));
     }
@@ -36,9 +40,16 @@ public class CheckOutPage {
         return productDescription().findElement(AppiumBy.className("android.widget.TextView")).getText();
     }
 
+    private WebElement completeOrderElement() {
+        return driver.findElement(AppiumBy.accessibilityId("test-CHECKOUT: COMPLETE!"));
+    }
 
     private WebElement productPrice() {
         return driver.findElement(AppiumBy.accessibilityId("test-Price"));
+    }
+
+    public String getThankYouMessage() {
+        return completeOrderElement().findElement(AppiumBy.className("android.widget.TextView")).getText();
     }
 
     public String getProductPrice() {
@@ -70,5 +81,9 @@ public class CheckOutPage {
         lastNameField().sendKeys(lastName);
         zipCodeField().sendKeys(zipCode);
         continueButton().click();
+    }
+
+    public void completeOrder() {
+        finishButton().click();
     }
 }

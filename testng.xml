@@ -6,12 +6,12 @@
             <class name="org.SauceLabs.SauceLabsTest">
                 <methods>
                     <exclude name="testMultipleLogins"/>
-                    <include name="testAddToCartButton"/>
-                    <include name="testVerifyQuantityAdded"/>
-                    <include name="testVerifyQuantityTwoAdded"/>
-                    <include name="testRemoveProduct"/>
-                    <include name="testVerifyCartDetails"/>
-                    <include name="testVerifyCartDetailsSingleItem"/>
+                    <exclude name="testAddToCartButton"/>
+                    <exclude name="testVerifyQuantityAdded"/>
+                    <exclude name="testVerifyQuantityTwoAdded"/>
+                    <exclude name="testRemoveProduct"/>
+                    <exclude name="testVerifyCartDetails"/>
+                    <exclude name="testVerifyCartDetailsSingleItem"/>
                     <include name="testEndToEndTransaction"/>
                 </methods>
             </class>

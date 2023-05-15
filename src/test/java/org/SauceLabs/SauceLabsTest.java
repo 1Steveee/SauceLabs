@@ -79,8 +79,8 @@ public class SauceLabsTest extends BaseTest {
 
     @Test
     public void testVerifyQuantityTwoAdded() {
-        this.productsPage.addSauceLabProduct(2);
-        assertEquals("2", this.productsPage.getCartTotalQuantity());
+        this.productsPage.addSauceLabProduct(3);
+        assertEquals("3", this.productsPage.getCartTotalQuantity());
     }
 
     @Test
@@ -125,6 +125,8 @@ public class SauceLabsTest extends BaseTest {
         assertEquals("FREE PONY EXPRESS DELIVERY!", checkOutPage.getShippingDetails());
         assertEquals("$32.39", checkOutPage.getTotalPrice());
 
+        checkOutPage.completeOrder();
+        assertEquals("THANK YOU FOR YOU ORDER", checkOutPage.getThankYouMessage());
 
     }
 

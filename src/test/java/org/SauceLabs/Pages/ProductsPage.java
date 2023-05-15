@@ -3,11 +3,16 @@ package org.SauceLabs.Pages;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.beanutils.WrapDynaBean;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 import static org.SauceLabs.Utillities.Helper.pauseExecution;
 
@@ -19,6 +24,7 @@ public class ProductsPage {
     public ProductsPage(AndroidDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
     }
 
     private WebElement sauceLabProduct() {
@@ -42,12 +48,30 @@ public class ProductsPage {
 
     public void addSauceLabProduct(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            sauceLabProduct().click();
+            if (i < 2) {
+                sauceLabProduct().click();
+            } else {
+                swipeAndFindElement();
+                sauceLabProduct().click();
+            }
+
         }
+    }
+
+
+
+    public void swipeAndFindElement() {
+        WebElement targetElement = driver.findElement(AppiumBy.androidUIAutomator
+                ("new UiScrollable(new UiSelector()" +
+                        ".scrollable(true)).scrollIntoView(new UiSelector().text(\"Sauce Labs Bolt T-Shirt\"))"));
     }
 
     public void removeSauceLabProduct(int quantity) {
         for (int i = 0; i < quantity; i++) {
+            if (i == 2) {
+
+                removeButton().click();
+            }
             removeButton().click();
         }
     }
