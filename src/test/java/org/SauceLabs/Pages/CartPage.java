@@ -53,6 +53,8 @@ public class CartPage {
         productsPage.addProductAndMoveToCart(1);
     }
 
+
+
     public CheckOutPage proceedToCheckOutPage() {
         checkOutButton().click();
         return new CheckOutPage(driver);
