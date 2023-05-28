@@ -3,7 +3,7 @@
 <suite name="Sauce Labs Test">
     <test name = "Sauce Labs Test">
         <classes>
-            <class name="org.SauceLabs.SauceLabsTest">
+            <class name="org.SauceLabs.android.SauceLabsTest">
                 <methods>
                     <exclude name="testMultipleLogins"/>
                     <exclude name="testAddToCartButton"/>

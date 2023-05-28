@@ -1,5 +1,6 @@
-package org.SauceLabs;
+package org.SauceLabs.android;
 
+import org.SauceLabs.DriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 

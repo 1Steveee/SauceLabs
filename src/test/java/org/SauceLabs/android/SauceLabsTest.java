@@ -1,10 +1,10 @@
-package org.SauceLabs;
+package org.SauceLabs.android;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.SauceLabs.Pages.CartPage;
-import org.SauceLabs.Pages.CheckOutPage;
-import org.SauceLabs.Pages.HomePage;
-import org.SauceLabs.Pages.ProductsPage;
+import org.SauceLabs.android.Pages.CartPage;
+import org.SauceLabs.android.Pages.CheckOutPage;
+import org.SauceLabs.android.Pages.HomePage;
+import org.SauceLabs.android.Pages.ProductsPage;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
