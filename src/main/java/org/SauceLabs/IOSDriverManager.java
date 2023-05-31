@@ -11,6 +11,7 @@ import java.time.Duration;
 public class IOSDriverManager {
 
     private IOSDriver driver;
+    private final String APPIUM_SERVER_URL = "http://localhost:4723/wd/hub";
 
     private final String APP_PATH = System
             .getProperty ("user.home") + "/Downloads/iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app";
@@ -26,7 +27,6 @@ public class IOSDriverManager {
     }
 
     public void createIOSDriver() throws MalformedURLException {
-        String APPIUM_SERVER_URL = "http://localhost:4723/wd/hub";
         driver = new IOSDriver(new URL(APPIUM_SERVER_URL),xcuiTestOptions());
         setUpDriverTimeOuts();
     }

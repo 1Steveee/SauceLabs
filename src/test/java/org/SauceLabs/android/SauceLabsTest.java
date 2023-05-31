@@ -48,7 +48,7 @@ public class SauceLabsTest extends BaseTest {
     public void testMultipleLogins(String username, String password, Boolean isValidLogin, Boolean correctPassword) {
         this.homePage.loginToApp(username,password, isValidLogin);
 
-        if (username == LOCKED_OUT_USER && correctPassword) {
+        if (username.equals(LOCKED_OUT_USER) && correctPassword) {
             assertEquals("Sorry, this user has been locked out." ,homePage.getLockedOutUserErrorMessage());
             return;
         }

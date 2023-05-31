@@ -12,7 +12,7 @@ public class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void testSetUp() throws MalformedURLException {
-        IOSDriverManager iosDriverManager = new IOSDriverManager();
+        iosDriverManager = new IOSDriverManager();
         iosDriverManager.createIOSDriver();
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Appium Sample tests for IOS">
+    <test name="WebDriverIO App IOS Tests" enabled="true">
+        <classes>
+            <class name="org.SauceLabs.ios.AppiumTest">
+                <methods>
+                    <include name="testAddToCartButton"/>
+                    <include name="testVerifyQuantityAdded"/>
+                    <include name="testVerifyQuantityTwoAdded"/>
+                    <include name="testRemoveProduct"/>
+                    <include name="testVerifyCartDetails"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->
