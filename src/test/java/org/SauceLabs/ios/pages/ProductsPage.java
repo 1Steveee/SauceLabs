@@ -47,7 +47,6 @@ public class ProductsPage {
 
 
     public void swipeAndFindElement() {
-
         WebElement targetCell = driver.findElement(AppiumBy
                 .iOSClassChain("**/XCUIElementTypeOther[`label == \"ADD TO CART\"`][5]"));
         HashMap<String, String> scrollObject = new HashMap<String, String>();

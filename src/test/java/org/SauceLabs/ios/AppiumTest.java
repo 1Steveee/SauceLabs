@@ -2,6 +2,7 @@ package org.SauceLabs.ios;
 
 import io.appium.java_client.ios.IOSDriver;
 import org.SauceLabs.ios.pages.CartPage;
+import org.SauceLabs.ios.pages.CheckOutPage;
 import org.SauceLabs.ios.pages.HomePage;
 import org.SauceLabs.ios.pages.ProductsPage;
 import org.testng.annotations.*;
@@ -97,6 +98,36 @@ public class AppiumTest extends BaseTest {
         assertEquals("$29.99", cartPage.getBackpackPrice());
         assertEquals("Sauce Labs Bike Light", cartPage.getSauceLabsBikeLightText());
         assertEquals("$9.99", cartPage.getBikeLightPrice());
+    }
+
+    @Test
+    public void testVerifyCartDetailsSingleItem() {
+        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        assertEquals("Sauce Labs Backpack", cartPage.getSauceLabsBackpackText());
+        assertEquals("$29.99", cartPage.getBackpackPrice());
+
+        cartPage.addAdditionalProduct();
+        assertEquals("Sauce Labs Bike Light", cartPage.getSauceLabsBikeLightText());
+        assertEquals("$9.99", cartPage.getBikeLightPrice());
+    }
+
+    @Test
+    public void testEndToEndTransaction() {
+        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        assertEquals("Sauce Labs Backpack", cartPage.getSauceLabsBackpackText());
+        assertEquals("$29.99", cartPage.getBackpackPrice());
+
+        CheckOutPage checkOutPage = cartPage.proceedToCheckOutPage();
+        checkOutPage.checkOut("Steven", "Test", "33803");
+        assertEquals("Sauce Labs Backpack", checkOutPage.getSauceLabsBackPackText());
+        assertEquals("$29.99", checkOutPage.getSauceLabsBackPackPrice());
+        assertEquals("SauceCard #31337", checkOutPage.getPaymentDetails());
+        assertEquals("FREE PONY EXPRESS DELIVERY!", checkOutPage.getShippingDetails());
+        assertEquals("$32.39", checkOutPage.getTotalPrice());
+
+        checkOutPage.completeOrder();
+        assertEquals("THANK YOU FOR YOU ORDER", checkOutPage.getThankYouMessage());
+
     }
 
     @AfterMethod

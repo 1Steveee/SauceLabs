@@ -31,11 +31,6 @@ public class CartPage {
         return driver.findElement(AppiumBy.accessibilityId("test-CONTINUE SHOPPING"));
     }
 
-    private WebElement productPrice(int index) {
-        return driver.findElement(AppiumBy.xpath
-                ("(//android.view.ViewGroup[@content-desc=\"test-Price\"])[" + index + "]/android.widget.TextView"));
-    }
-
     private WebElement checkOutButton() {
         return driver.findElement(AppiumBy.accessibilityId("test-CHECKOUT"));
     }
@@ -65,8 +60,8 @@ public class CartPage {
 
 
 
-//    public CheckOutPage proceedToCheckOutPage() {
-//        checkOutButton().click();
-//        return new CheckOutPage(driver);
-//    }
+    public CheckOutPage proceedToCheckOutPage() {
+        checkOutButton().click();
+        return new CheckOutPage(driver);
+    }
 }

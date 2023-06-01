@@ -10,6 +10,8 @@
                     <include name="testVerifyQuantityTwoAdded"/>
                     <include name="testRemoveProduct"/>
                     <include name="testVerifyCartDetails"/>
+                    <include name="testVerifyCartDetailsSingleItem"/>
+                    <include name="testEndToEndTransaction"/>
                 </methods>
             </class>
         </classes>
