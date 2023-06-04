@@ -142,8 +142,18 @@ public class AppiumTest extends BaseTest {
 
     @Test
     public void testFilterByPriceAsc() {
+        String[] sortedProductTitles = new String[] {"Sauce Labs Onesie","Sauce Labs Bike Light",
+                "Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)",
+                "Sauce Labs Backpack", "Sauce Labs Fleece Jacket"};
         this.productsPage.filterByPriceAsc();
+        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
+    }
 
+    @Test
+    public void testFilterByPriceDesc() {
+        String[] sortedProductTitles = new String[] {"Sauce Labs Fleece Jacket","Sauce Labs Backpack", "Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light","Sauce Labs Onesie"};
+        this.productsPage.filterByPriceDesc();
+        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
     }
 
     @AfterMethod

@@ -23,6 +23,14 @@ public class ProductsPage {
         return driver.findElement(AppiumBy.accessibilityId("test-Modal Selector Button"));
     }
 
+    private WebElement priceAscButton() {
+        return driver.findElement(AppiumBy.accessibilityId("Price (low to high)"));
+    }
+
+    private WebElement priceDescButton() {
+        return driver.findElement(AppiumBy.accessibilityId("Price (high to low)"));
+    }
+
     private List<WebElement> products() {
         return driver.findElements(AppiumBy.name("test-Item title"));
     }
@@ -31,7 +39,7 @@ public class ProductsPage {
         return driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`label == \"ADD TO CART\"`][1]"));
     }
 
-    private WebElement descendingOrderButton() {
+    private WebElement nameDescOrderButton() {
         return driver.findElement(AppiumBy.accessibilityId("Name (Z to A)"));
     }
 
@@ -109,9 +117,16 @@ public class ProductsPage {
 
     public void filterByNameDesc() {
         filterButton().click();
-        descendingOrderButton().click();
+        nameDescOrderButton().click();
     }
 
     public void filterByPriceAsc() {
+        filterButton().click();
+        priceAscButton().click();
+    }
+
+    public void filterByPriceDesc() {
+        filterButton().click();
+        priceDescButton().click();
     }
 }
