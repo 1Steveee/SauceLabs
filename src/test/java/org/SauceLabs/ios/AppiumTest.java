@@ -10,6 +10,8 @@ import org.testng.annotations.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
 
@@ -127,6 +129,20 @@ public class AppiumTest extends BaseTest {
 
         checkOutPage.completeOrder();
         assertEquals("THANK YOU FOR YOU ORDER", checkOutPage.getThankYouMessage());
+
+    }
+
+    @Test
+    public void testFilterByNameDesc() {
+        String[] sortedProductTitles = new String[] {"Test.allTheThings() T-Shirt (Red)",
+                "Sauce Labs Onesie", "Sauce Labs Fleece Jacket", "Sauce Labs Bolt T-Shirt","Sauce Labs Bike Light", "Sauce Labs Backpack"};
+        this.productsPage.filterByNameDesc();
+        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
+    }
+
+    @Test
+    public void testFilterByPriceAsc() {
+        this.productsPage.filterByPriceAsc();
 
     }
 
