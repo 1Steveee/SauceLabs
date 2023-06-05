@@ -25,6 +25,7 @@ public class AppiumTest extends BaseTest {
     private HomePage homePage;
     private ProductsPage productsPage;
     private IOSDriver driver;
+    private CartPage cartPage;
 
     @BeforeClass
     public void setUpTest() {
@@ -95,7 +96,7 @@ public class AppiumTest extends BaseTest {
 
     @Test
     public void testVerifyCartDetails() {
-        CartPage cartPage = this.productsPage.addProductAndMoveToCart(2);
+        this.cartPage = this.productsPage.addProductAndMoveToCart(2);
         assertEquals("Sauce Labs Backpack", cartPage.getSauceLabsBackpackText());
         assertEquals("$29.99", cartPage.getBackpackPrice());
         assertEquals("Sauce Labs Bike Light", cartPage.getSauceLabsBikeLightText());
@@ -104,7 +105,7 @@ public class AppiumTest extends BaseTest {
 
     @Test
     public void testVerifyCartDetailsSingleItem() {
-        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        this.cartPage = this.productsPage.addProductAndMoveToCart(1);
         assertEquals("Sauce Labs Backpack", cartPage.getSauceLabsBackpackText());
         assertEquals("$29.99", cartPage.getBackpackPrice());
 
@@ -115,7 +116,7 @@ public class AppiumTest extends BaseTest {
 
     @Test
     public void testEndToEndTransaction() {
-        CartPage cartPage = this.productsPage.addProductAndMoveToCart(1);
+        this.cartPage = this.productsPage.addProductAndMoveToCart(1);
         assertEquals("Sauce Labs Backpack", cartPage.getSauceLabsBackpackText());
         assertEquals("$29.99", cartPage.getBackpackPrice());
 
@@ -155,6 +156,18 @@ public class AppiumTest extends BaseTest {
         this.productsPage.filterByPriceDesc();
         assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
     }
+
+    @Test
+    public void testRemoveProductFromCart() {
+        this.cartPage = this.productsPage.addProductAndMoveToCart(2);
+        assertEquals(2, this.cartPage.getCartQuantity());
+
+        this.cartPage.removeProductAtPosition(2);
+        assertEquals(1, this.cartPage.getCartQuantity());
+
+    }
+
+
 
     @AfterMethod
     public void logout() {

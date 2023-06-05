@@ -12,9 +12,10 @@
 <!--                    <include name="testVerifyCartDetails"/>-->
 <!--                    <include name="testVerifyCartDetailsSingleItem"/>-->
 <!--                    <include name="testEndToEndTransaction"/>-->
-                        <include name="testFilterByNameDesc"/>
-                        <include name="testFilterByPriceAsc"/>
-                        <include name="testFilterByPriceDesc"/>
+<!--                        <include name="testFilterByNameDesc"/>-->
+<!--                        <include name="testFilterByPriceAsc"/>-->
+<!--                        <include name="testFilterByPriceDesc"/>-->
+                        <include name="testRemoveProductFromCart"/>
                 </methods>
             </class>
         </classes>
