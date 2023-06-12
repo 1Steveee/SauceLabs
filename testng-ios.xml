@@ -16,6 +16,7 @@
 <!--                        <include name="testFilterByPriceAsc"/>-->
 <!--                        <include name="testFilterByPriceDesc"/>-->
                         <include name="testRemoveProductFromCart"/>
+                        <include name="testValidateProductDetails"/>
                 </methods>
             </class>
         </classes>

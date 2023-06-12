@@ -1,10 +1,7 @@
 package org.SauceLabs.ios;
 
 import io.appium.java_client.ios.IOSDriver;
-import org.SauceLabs.ios.pages.CartPage;
-import org.SauceLabs.ios.pages.CheckOutPage;
-import org.SauceLabs.ios.pages.HomePage;
-import org.SauceLabs.ios.pages.ProductsPage;
+import org.SauceLabs.ios.pages.*;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
@@ -164,9 +161,21 @@ public class AppiumTest extends BaseTest {
 
         this.cartPage.removeProductAtPosition(2);
         assertEquals(1, this.cartPage.getCartQuantity());
-
     }
 
+    @Test
+    public void testValidateProductDetails() {
+        String backPackTitle = this.productsPage.getBackPackTitle();
+        String backPackPrice = this.productsPage.getBackPackPrice();
+
+        assertEquals("Sauce Labs Backpack", backPackTitle);
+        assertEquals("$29.99",backPackPrice);
+
+        ProductDetail productDetail = this.productsPage.goToBackPackProductDetails();
+
+        assertEquals(backPackTitle, productDetail.getBackPackTitle());
+        assertEquals(backPackPrice, productDetail.getProductPrice());
+    }
 
 
     @AfterMethod

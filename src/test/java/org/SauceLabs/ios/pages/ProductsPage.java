@@ -16,7 +16,14 @@ public class ProductsPage {
     public ProductsPage(IOSDriver driver) {
         this.driver = driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
 
+    private WebElement backPackTitle() {
+        return driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`label == \"Sauce Labs Backpack\"`]"));
+    }
+
+    private WebElement backPackPrice() {
+        return driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`label == \"$29.99\"`]"));
     }
 
     private WebElement filterButton() {
@@ -52,18 +59,16 @@ public class ProductsPage {
     }
 
     public void addSauceLabProduct(int quantity) {
+        int maxProductPerRow = 2;
         for (int i = 0; i < quantity; i++) {
-            if (i < 2) {
+            if (i < maxProductPerRow) {
                 sauceLabProduct().click();
             } else {
                 swipeAndFindElement();
                 sauceLabProduct().click();
             }
-
         }
     }
-
-
 
     public void swipeAndFindElement() {
         WebElement targetCell = driver.findElement(AppiumBy
@@ -76,23 +81,19 @@ public class ProductsPage {
     public void removeSauceLabProduct(int quantity) {
         for (int i = 0; i < quantity; i++) {
             if (i == 2) {
-
                 removeButton().click();
             }
             removeButton().click();
         }
     }
 
-
     public String getBackpackPrice() {
         return driver.findElements(AppiumBy.className("android.widget.TextView")).get(4).getText();
     }
 
-
     public String getRemoveButtonText() {
         return removeButton().getText();
     }
-
 
     public String getCartTotalQuantity() {
         return cart().getText();
@@ -111,7 +112,6 @@ public class ProductsPage {
         for (int i = 0; i < productsListSize; i++) {
             productTitles[i] = products.get(i).getText();
         }
-
         return productTitles;
     }
 
@@ -128,5 +128,18 @@ public class ProductsPage {
     public void filterByPriceDesc() {
         filterButton().click();
         priceDescButton().click();
+    }
+
+    public String getBackPackTitle() {
+        return backPackTitle().getText();
+    }
+
+    public String getBackPackPrice() {
+        return backPackPrice().getText();
+    }
+
+    public ProductDetail goToBackPackProductDetails() {
+        backPackTitle().click();
+        return new ProductDetail(driver);
     }
 }
