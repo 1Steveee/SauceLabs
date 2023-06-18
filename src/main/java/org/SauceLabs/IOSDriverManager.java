@@ -8,17 +8,17 @@ import org.SauceLabs.devices.IOSDevice;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.time.Duration;
 
 import static org.SauceLabs.devices.DeviceDataBuilder.registerIOSDevice;
 
 public class IOSDriverManager {
-
     private IOSDriver driver;
+    private final String APP_PATH = String
+        .valueOf(Path.of(System.getProperty
+                ("user.dir"),"/src/test/resources/app", "iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app"));
 
-    private final String APP_PATH = System
-            .getProperty ("user.home") + "/Downloads/iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app";
-//    add application to resource folder
 
     private XCUITestOptions xcuiTestOptions() throws FileNotFoundException {
         IOSDevice iosDevice = registerIOSDevice();
