@@ -26,7 +26,7 @@ public class SauceLabsTest extends BaseTest {
 
     @BeforeClass
     public void setUpTest() {
-        this.driver = driverManager.getDriver();
+        this.driver = androidDriverManager.getDriver();
         this.homePage = new HomePage(driver);
         this.productsPage = new ProductsPage(driver);
     }

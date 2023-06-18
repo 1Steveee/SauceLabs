@@ -1,6 +1,6 @@
 package org.SauceLabs.android;
 
-import org.SauceLabs.DriverManager;
+import org.SauceLabs.AndroidDriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -8,16 +8,16 @@ import java.net.MalformedURLException;
 
 public class BaseTest {
 
-    protected DriverManager driverManager;
+    protected AndroidDriverManager androidDriverManager;
 
     @BeforeClass(alwaysRun = true)
     public void testSetup() throws MalformedURLException {
-        driverManager = new DriverManager();
-        driverManager.createAndroidDriver();
+        androidDriverManager = new AndroidDriverManager();
+        androidDriverManager.createAndroidDriver();
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        driverManager.stopDriver();
+        androidDriverManager.stopDriver();
     }
 }

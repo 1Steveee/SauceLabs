@@ -119,14 +119,14 @@ public class AppiumTest extends BaseTest {
 
         CheckOutPage checkOutPage = cartPage.proceedToCheckOutPage();
         checkOutPage.checkOut("Steven", "Test", "33803");
-        assertEquals("Sauce Labs Backpack", checkOutPage.getSauceLabsBackPackText());
-        assertEquals("$29.99", checkOutPage.getSauceLabsBackPackPrice());
-        assertEquals("SauceCard #31337", checkOutPage.getPaymentDetails());
-        assertEquals("FREE PONY EXPRESS DELIVERY!", checkOutPage.getShippingDetails());
-        assertEquals("$32.39", checkOutPage.getTotalPrice());
+        assertEquals(checkOutPage.getSauceLabsBackPackText(), "Sauce Labs Backpack");
+        assertEquals(checkOutPage.getSauceLabsBackPackPrice(), "$29.99");
+        assertEquals(checkOutPage.getPaymentDetails(), "SauceCard #31337");
+        assertEquals(checkOutPage.getShippingDetails(), "FREE PONY EXPRESS DELIVERY!");
+        assertEquals(checkOutPage.getTotalPrice(), "$32.39");
 
         checkOutPage.completeOrder();
-        assertEquals("THANK YOU FOR YOU ORDER", checkOutPage.getThankYouMessage());
+        assertEquals(checkOutPage.getThankYouMessage(), "THANK YOU FOR YOU ORDER");
 
     }
 
@@ -135,7 +135,7 @@ public class AppiumTest extends BaseTest {
         String[] sortedProductTitles = new String[] {"Test.allTheThings() T-Shirt (Red)",
                 "Sauce Labs Onesie", "Sauce Labs Fleece Jacket", "Sauce Labs Bolt T-Shirt","Sauce Labs Bike Light", "Sauce Labs Backpack"};
         this.productsPage.filterByNameDesc();
-        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
+        assertArrayEquals(sortedProductTitles, this.productsPage.getProductTitles());
     }
 
     @Test
@@ -144,23 +144,23 @@ public class AppiumTest extends BaseTest {
                 "Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)",
                 "Sauce Labs Backpack", "Sauce Labs Fleece Jacket"};
         this.productsPage.filterByPriceAsc();
-        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
+        assertArrayEquals(sortedProductTitles, this.productsPage.getProductTitles());
     }
 
     @Test
     public void testFilterByPriceDesc() {
         String[] sortedProductTitles = new String[] {"Sauce Labs Fleece Jacket","Sauce Labs Backpack", "Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light","Sauce Labs Onesie"};
         this.productsPage.filterByPriceDesc();
-        assertArrayEquals(this.productsPage.getProductTitles(), sortedProductTitles);
+        assertArrayEquals(sortedProductTitles, this.productsPage.getProductTitles());
     }
 
     @Test
     public void testRemoveProductFromCart() {
         this.cartPage = this.productsPage.addProductAndMoveToCart(2);
-        assertEquals(2, this.cartPage.getCartQuantity());
+        assertEquals(this.cartPage.getCartQuantity(), 2);
 
         this.cartPage.removeProductAtPosition(2);
-        assertEquals(1, this.cartPage.getCartQuantity());
+        assertEquals(this.cartPage.getCartQuantity(), 1);
     }
 
     @Test
@@ -168,13 +168,14 @@ public class AppiumTest extends BaseTest {
         String backPackTitle = this.productsPage.getBackPackTitle();
         String backPackPrice = this.productsPage.getBackPackPrice();
 
-        assertEquals("Sauce Labs Backpack", backPackTitle);
-        assertEquals("$29.99",backPackPrice);
+        assertEquals(backPackTitle, "Sauce Labs Backpack");
+        assertEquals(backPackPrice, "$29.99");
 
         ProductDetail productDetail = this.productsPage.goToBackPackProductDetails();
 
-        assertEquals(backPackTitle, productDetail.getBackPackTitle());
-        assertEquals(backPackPrice, productDetail.getProductPrice());
+        assertEquals(productDetail.getBackPackTitle(), backPackTitle);
+        assertEquals(productDetail.getProductPrice(), backPackPrice);
+
     }
 
 

@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class DriverManager {
+public class AndroidDriverManager {
 
     private AndroidDriver driver;
     private final String APP_PATH = System.getProperty ("user.home") + "\\Downloads\\Android.SauceLabs.Mobile.Sample.app.2.7.1.apk";
