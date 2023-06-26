@@ -1,0 +1,15 @@
+{
+  "devices":
+  [
+    {
+      "deviceName": "iPhone 14",
+      "platformName": "iOS",
+      "platformVersion": "16.2"
+    },
+    {
+      "deviceName": "iPhone 14 Pro",
+      "platformName": "iOS",
+      "platformVersion": "16.2"
+    }
+  ]
+}

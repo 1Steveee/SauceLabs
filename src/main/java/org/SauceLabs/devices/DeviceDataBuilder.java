@@ -1,31 +1,45 @@
 package org.SauceLabs.devices;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.json.JsonOutput;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Optional;
 
 public class DeviceDataBuilder {
 
-    public static IOSDevice registerIOSDevice() throws FileNotFoundException {
+    public static IOSDevice registerIOSDevice(String deviceName) throws FileNotFoundException {
         JSONParser parser = new JSONParser();
+        
+        try (FileReader reader = new FileReader("src/test/resources/iOS-Devices.json")){
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
-        try {
-            Object obj = parser.parse(new FileReader("src/main/java/org/SauceLabs/devices/iOS-Devices.json"));
-            JSONObject jsonObject = (JSONObject)obj;
+            JSONArray devices = (JSONArray) jsonObject.get("devices");
 
-            return IOSDevice
-                    .builder()
-                    .PlatformName((String)jsonObject.get("PlatformName"))
-                    .PlatformVersion((String)jsonObject.get("PlatformVersion"))
-                    .DeviceName((String)jsonObject.get("DeviceName"))
-                    .build();
+            for (Object o : devices) {
+                JSONObject device = (JSONObject) o;
+
+                if (device.get("deviceName").equals(deviceName)) {
+
+                    return IOSDevice
+                            .builder()
+                            .platformName((String) device.get("platformName"))
+                            .platformVersion((String) device.get("platformVersion"))
+                            .deviceName((String) device.get("deviceName"))
+                            .build();
+                }
+            }
+
 
         } catch(Exception e) {
+            //log4j depedency
             e.printStackTrace();
         }
 
+        System.out.println("No device found with the name: " + deviceName);
         return null;
     }
 }

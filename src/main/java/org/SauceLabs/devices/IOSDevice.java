@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class IOSDevice {
-    private String PlatformName;
-    private String PlatformVersion;
-    private String DeviceName;
+    private String platformName;
+    private String platformVersion;
+    private String deviceName;
 }
 

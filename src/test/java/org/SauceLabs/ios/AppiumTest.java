@@ -26,7 +26,6 @@ public class AppiumTest extends BaseTest {
 
     @BeforeClass
     public void setUpTest() {
-        System.out.println("here");
         this.driver  = iosDriverManager.getDriver();
 
         this.homePage = new HomePage(driver);

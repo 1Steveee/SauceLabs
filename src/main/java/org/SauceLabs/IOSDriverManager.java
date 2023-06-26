@@ -14,14 +14,21 @@ import java.time.Duration;
 import static org.SauceLabs.devices.DeviceDataBuilder.registerIOSDevice;
 
 public class IOSDriverManager {
+    private final String deviceName;
     private IOSDriver driver;
     private final String APP_PATH = String
         .valueOf(Path.of(System.getProperty
                 ("user.dir"),"/src/test/resources/app", "iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app"));
 
-
+    public IOSDriverManager(String deviceName) {
+        this.deviceName = deviceName;
+    }
+    
     private XCUITestOptions xcuiTestOptions() throws FileNotFoundException {
-        IOSDevice iosDevice = registerIOSDevice();
+        IOSDevice iosDevice = registerIOSDevice(deviceName);
+
+        assert iosDevice != null;
+
         return new XCUITestOptions()
                 .setPlatformName(iosDevice.getPlatformName())
                 .setPlatformVersion(iosDevice.getPlatformVersion())

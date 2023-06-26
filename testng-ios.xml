@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Appium Sample tests for IOS">
-    <test name="WebDriverIO App IOS Tests" enabled="true">
+    <test name="WebDriverIO App IOS Tests - iPhone 14" enabled="true">
+        <parameter name="deviceName" value="iPhone 14"/>
+        <classes>
+            <class name="org.SauceLabs.ios.AppiumTest">
+                <methods>
+                    <include name="testAddToCartButton"/>
+                    <include name="testVerifyQuantityAdded"/>
+                    <include name="testVerifyQuantityTwoAdded"/>
+                    <include name="testRemoveProduct"/>
+                    <include name="testVerifyCartDetails"/>
+                    <include name="testVerifyCartDetailsSingleItem"/>
+                    <include name="testEndToEndTransaction"/>
+                    <include name="testFilterByNameDesc"/>
+                    <include name="testFilterByPriceAsc"/>
+                    <include name="testFilterByPriceDesc"/>
+                    <include name="testRemoveProductFromCart"/>
+                    <include name="testValidateProductDetails"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="WebDriverIO App IOS Tests - iPhone 14 Pro" enabled="true">
+        <parameter name="deviceName" value="iPhone 14 Pro"/>
         <classes>
             <class name="org.SauceLabs.ios.AppiumTest">
                 <methods>
