@@ -1,15 +1,20 @@
 package org.SauceLabs.devices;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.openqa.selenium.json.JsonOutput;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Optional;
+
 
 public class DeviceDataBuilder {
+
+    private static final Logger LOGGER = LogManager.getLogger (
+            "DeviceDataBuilder.class");
 
     public static IOSDevice registerIOSDevice(String deviceName) throws FileNotFoundException {
         JSONParser parser = new JSONParser();
@@ -35,8 +40,7 @@ public class DeviceDataBuilder {
 
 
         } catch(Exception e) {
-            //log4j depedency
-            e.printStackTrace();
+            LOGGER.error(e);
         }
 
         System.out.println("No device found with the name: " + deviceName);
